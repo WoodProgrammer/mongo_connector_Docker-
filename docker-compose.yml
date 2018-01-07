@@ -1,0 +1,23 @@
+version: '2.0'
+services:
+  
+  mongo:
+    image: mongo
+    hostname: "db"
+    command: mongod --replSet my-mongo-set
+
+  elasticsearch:
+    image: elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+    hostname: "elastic"
+
+  app:
+    image: yeasy/mongo-connector
+    command: "tail -f /etc/hosts"
+    links:
+      - mongo:mongo
+      - elasticsearch:elasticsearch

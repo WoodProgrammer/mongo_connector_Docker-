@@ -7,6 +7,7 @@ services:
     command: mongod --replSet my-mongo-set
 
   elasticsearch:
+
     image: elasticsearch
     ports:
       - "9200:9200"

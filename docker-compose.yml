@@ -3,11 +3,14 @@ services:
   
   mongo:
     image: mongo
-    hostname: "db"
+    command: mongod --replSet my-mongo-set
+    
+  mongo2:
+    image: mongo
     command: mongod --replSet my-mongo-set
 
-  elasticsearch:
 
+  elasticsearch:
     image: elasticsearch
     ports:
       - "9200:9200"
@@ -22,3 +25,4 @@ services:
     links:
       - mongo:mongo
       - elasticsearch:elasticsearch
+
